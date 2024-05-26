@@ -15,17 +15,17 @@ function App() {
   const { user } = appContext;
 
   const authRoutes = [
-    { path: "/", element: <Login /> },
+    { path: "/login", element: <Login /> },
     { path: "/*", element: <Navigate to="/" replace /> },
   ];
   const userRoutes = [
-    { path: "/", element: <Home /> },
     { path: "/user-profile", element: <UserProfile /> },
     { path: "/*", element: <Navigate to="/" replace /> },
   ];
 
   const AuthLayout = () => (
     <Routes>
+      <Route path="/" element={<Home />}></Route>
       {authRoutes.map((r, idx) => (
         <Route key={idx} path={r.path} element={r.element} />
       ))}
@@ -34,6 +34,7 @@ function App() {
 
   const UserLayout = () => (
     <Routes>
+      <Route path="/" element={<Home />}></Route>
       {userRoutes.map((r, idx) => (
         <Route key={idx} path={r.path} element={r.element} />
       ))}

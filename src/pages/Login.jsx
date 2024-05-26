@@ -17,6 +17,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 
 import { AppContext } from "../context";
 import { TOKEN, USER } from "../constant";
+import api from "../api";
 
 const styleModal = {
   position: "absolute",
@@ -215,10 +216,7 @@ const Login = () => {
     console.log(payload);
     const createAccount = async () => {
       try {
-        await axios.post(
-          `https://samnote.mangasocial.online/register `,
-          payload
-        );
+        await api.post(`https://samnote.mangasocial.online/register `, payload);
         setOpenDialog(true);
       } catch (err) {
         console.log(err);
@@ -233,7 +231,7 @@ const Login = () => {
       password,
     };
     try {
-      const res = await axios.post(
+      const res = await api.post(
         `https://samnote.mangasocial.online/login`,
         payload
       );
