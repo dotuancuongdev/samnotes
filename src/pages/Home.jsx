@@ -119,7 +119,7 @@ const Home = () => {
   };
   const mdScreen = useMediaQuery("(max-width:767px)");
   return (
-    <>
+    <Box sx={{ padding: "0 20%" }}>
       <header
         style={{
           display: "flex",
@@ -570,17 +570,17 @@ const Home = () => {
                   alignItems: "center",
                 }}
               >
-                <div style={{ width: "10%" }}>
+                <div style={{ width: "15%" }}>
                   <Avatar
                     src={item.url_avatar}
                     alt="Avatar"
-                    style={{ width: "50px", height: "50px" }}
+                    sx={{ width: "50px", height: "50px" }}
                   />
                 </div>
 
                 <div
                   style={{
-                    width: "35%",
+                    width: "65%",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
@@ -591,12 +591,23 @@ const Home = () => {
                 <div
                   style={{
                     width: "20%",
+                    display: "flex",
+                    alignItems: "center",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
                   }}
                 >
                   Online
+                  <div
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      marginLeft: "20px",
+                      backgroundColor: "rgb(14 152 198)",
+                      borderRadius: "50%",
+                    }}
+                  ></div>
                 </div>
               </div>
             ))
@@ -875,7 +886,7 @@ const Home = () => {
         </ul>
       </footer>
       <p style={{ textAlign: "center", padding: "20px 0" }}>© Automatic</p>
-    </>
+    </Box>
   );
 };
 

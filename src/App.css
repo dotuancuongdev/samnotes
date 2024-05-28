@@ -10,9 +10,7 @@ li {
   left: 0;
   top: 0;
 }
-body {
-  padding: 0 20%;
-}
+
 @media (max-width: 767px) {
   header {
     justify-content: space-around !important;
