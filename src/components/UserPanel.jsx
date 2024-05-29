@@ -69,7 +69,7 @@ const styleModal = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 8,
+  p: 6,
 };
 
 export const UserPanel = () => {
@@ -144,13 +144,13 @@ export const UserPanel = () => {
   return (
     <>
       {user && (
-        <Box className="flex pl-[314px]">
+        <Box className="flex pl-[320px]">
           <Box
-            className={`w-[250px] min-h-screen bg-[#1D1D1D] text-white p-8 fixed top-0 left-0`}
+            className={`w-[320px] min-h-screen bg-[#1D1D1D] text-white p-8 fixed top-0 left-0`}
           >
             <Box className="flex items-center justify-between mb-10">
               <Box
-                className="flex gap-5 items-center cursor-pointer"
+                className="flex gap-3 items-center cursor-pointer"
                 onClick={() => navigate(`/user/profile`)}
               >
                 <img
@@ -173,7 +173,8 @@ export const UserPanel = () => {
                 id="input-with-sx"
                 label="Search messenger"
                 variant="standard"
-                className="text-white"
+                sx={{ input: { color: "white" } }}
+                InputLabelProps={{ color: "info" }}
               />
             </Box>
 
