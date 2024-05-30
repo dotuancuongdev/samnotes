@@ -19,7 +19,7 @@ import "../App.css";
 import "../bootstrap.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const customTime = (lastDate) => {
@@ -53,6 +53,7 @@ const Home = () => {
     try {
       const res = await axios(`https://samnote.mangasocial.online/numbernote`);
       setInformation(res.data.data);
+      console.log("uihuhreuhrehcerh", res.data.data);
     } catch (err) {
       console.log(err);
     } finally {
@@ -356,13 +357,16 @@ const Home = () => {
                   }}
                 >
                   <p style={{ margin: 0, width: "5%" }}>{index + 1}</p>
-                  <div style={{ width: "10%" }}>
+                  <Link
+                    to={`/user/profile/${info.idUser}`}
+                    style={{ width: "10%" }}
+                  >
                     <Avatar
                       src={info.Avatar}
                       alt="Avatar"
                       style={{ width: "50px", height: "50px" }}
                     />
-                  </div>
+                  </Link>
                   <p
                     style={{
                       margin: 0,

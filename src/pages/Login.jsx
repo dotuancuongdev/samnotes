@@ -238,6 +238,7 @@ const Login = () => {
       setUser(res.data.user);
       localStorage.setItem(USER, JSON.stringify(res.data.user));
       localStorage.setItem(TOKEN, res.data.jwt);
+      console.log(res);
       setUserName("");
       setPassword("");
     } catch (err) {
