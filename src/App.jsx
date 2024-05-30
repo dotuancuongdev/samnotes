@@ -10,8 +10,13 @@ import UserProfile from "./pages/UserProfile";
 import UserNotes from "./pages/UserNotes";
 import User from "./pages/User";
 import UserSetting from "./pages/UserSetting";
+import { Alert, Snackbar } from "@mui/material";
+import OtherUser from "./pages/OtherUser";
 
-const publicRoutes = [{ path: "/", element: <Home /> }];
+const publicRoutes = [
+  { path: "/", element: <Home /> },
+  { path: "/other-user/:id", element: <OtherUser /> },
+];
 
 const authRoutes = [{ path: "/login", element: <Login /> }];
 
@@ -22,12 +27,44 @@ const userRoutes = [
   { path: "/user/setting", element: <UserSetting /> },
 ];
 
+const AppSnackbar = () => {
+  const appContext = useContext(AppContext);
+  const { snackbar, setSnackbar } = appContext;
+  const { isOpen, message, severity } = snackbar;
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbar({ isOpen: false, message: "", severity: "" });
+  };
+
+  return (
+    <Snackbar
+      open={isOpen}
+      autoHideDuration={6000}
+      onClose={handleCloseSnackbar}
+    >
+      <Alert
+        onClose={handleCloseSnackbar}
+        severity={severity}
+        variant="filled"
+        sx={{ width: "100%" }}
+      >
+        {message}
+      </Alert>
+    </Snackbar>
+  );
+};
+
 function App() {
   const appContext = useContext(AppContext);
   const { user } = appContext;
 
   return (
     <BrowserRouter>
+      <AppSnackbar />
       <Routes>
         {publicRoutes.map((r) => (
           <Route path={r.path} element={r.element} key={r.path} />

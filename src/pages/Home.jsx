@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useNavigate } from "react-router-dom";
 
 const customTime = (lastDate) => {
   const milliseconds = Math.floor(new Date() - new Date(lastDate));
@@ -48,6 +49,8 @@ const Home = () => {
   const [userOnline, setUserOnline] = useState(null);
   const [loading, setLoading] = useState(false);
   const [canRefresh, setCanRefresh] = useState(true);
+
+  const navigate = useNavigate();
 
   const getProfile = async () => {
     try {
@@ -353,6 +356,10 @@ const Home = () => {
                     textOverflow: "ellipsis",
                     borderBottom: "1px dotted #000",
                     backgroundColor: "#fff",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    navigate(`/other-user/${info.id}`);
                   }}
                 >
                   <p style={{ margin: 0, width: "5%" }}>{index + 1}</p>
