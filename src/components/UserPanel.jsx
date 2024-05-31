@@ -28,6 +28,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { handleLogOut } from "../helper";
 import { SketchPicker } from "react-color";
 import DatePicker from "react-datepicker";
+import api from "../api";
 
 const navbarItems = [
   {
@@ -77,10 +78,10 @@ export const UserPanel = () => {
   const [data, setData] = useState("");
   const [title, setTitle] = useState("");
   const [idFolder, setIdFolder] = useState("");
-  const [dueAt, setDueAt] = useState(new Date());
+  const [dueAt, setDueAt] = useState(null);
   const [pinned, setPinned] = useState(false);
   const [lock, setLock] = useState("");
-  const [remindAt, setRemindAt] = useState(new Date());
+  const [remindAt, setRemindAt] = useState(null);
   const [linkNoteShare, setLinkNoteShare] = useState("");
   const [notePublic, setNotePublic] = useState(0);
   const [openModal, setOpenModal] = React.useState(false);
@@ -94,7 +95,7 @@ export const UserPanel = () => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const appContext = useContext(AppContext);
-  const { user, setUser } = appContext;
+  const { user, setUser, setSnackbar } = appContext;
 
   const navigate = useNavigate();
 
@@ -125,11 +126,17 @@ export const UserPanel = () => {
     } else {
       idFolderNumber = parseInt(idFolder);
     }
+    const parsedColor = {
+      r: parseInt(color.r),
+      g: parseInt(color.g),
+      b: parseInt(color.b),
+      a: parseInt(color.a),
+    };
     const payload = {
       type,
       data,
       title,
-      color,
+      color: parsedColor,
       idFolder: idFolderNumber,
       dueAt: JSON.parse(JSON.stringify(dueAt)),
       pinned,
@@ -138,7 +145,20 @@ export const UserPanel = () => {
       linkNoteShare,
       notePublic,
     };
-    console.log(payload);
+    const postNewNote = async () => {
+      try {
+        await api.post(`/notes/${user.id}`, payload);
+        console.log(`https://samnote.mangasocial.online/notes/${user.id}`);
+        setSnackbar({
+          isOpen: true,
+          message: "Created new note succesfully",
+          severity: "success",
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    postNewNote();
   };
 
   return (

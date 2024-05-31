@@ -176,6 +176,7 @@ const Home = () => {
                   ? { color: "#fff", padding: "10px 0px" }
                   : { whiteSpace: "nowrap", fontSize: "14px" }
               }
+              onClick={() => navigate(`/user/note`)}
             >
               Manager My Note
             </li>
@@ -233,6 +234,9 @@ const Home = () => {
                       fontSize: "14px",
                     }
               }
+              onClick={() => {
+                navigate(`/login`);
+              }}
             >
               Login
             </li>
@@ -359,7 +363,7 @@ const Home = () => {
                     cursor: "pointer",
                   }}
                   onClick={() => {
-                    navigate(`/other-user/${info.id}`);
+                    navigate(`/other-user/${info.idUser}`);
                   }}
                 >
                   <p style={{ margin: 0, width: "5%" }}>{index + 1}</p>
@@ -496,6 +500,7 @@ const Home = () => {
                 borderBottom: "1px dotted #000",
                 alignItems: "center",
               }}
+              onClick={() => navigate(`/other-user/${item.id}`)}
             >
               <div
                 style={{

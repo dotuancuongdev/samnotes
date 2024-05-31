@@ -231,10 +231,7 @@ const Login = () => {
       password,
     };
     try {
-      const res = await api.post(
-        `https://samnote.mangasocial.online/login`,
-        payload
-      );
+      const res = await api.post(`/login`, payload);
       setUser(res.data.user);
       localStorage.setItem(USER, JSON.stringify(res.data.user));
       localStorage.setItem(TOKEN, res.data.jwt);
@@ -246,7 +243,17 @@ const Login = () => {
   };
 
   const handleForgotPassword = () => {
-    console.log(forgotPassword);
+    const forgotPass = async () => {
+      try {
+        await api.post(`/resetPasswork`, {
+          gmail: forgotPassword,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      console.log(JSON.stringify(forgotPassword));
+    };
+    forgotPass();
   };
 
   return (

@@ -43,7 +43,7 @@ const UserProfile = () => {
             <img
               src={userInfomations.Avarta}
               alt=""
-              className="w-full h-[800px]"
+              className="w-full h-[500px]"
             />
 
             <Typography
