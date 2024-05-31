@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const customTime = (lastDate) => {
   const milliseconds = Math.floor(new Date() - new Date(lastDate));
@@ -56,6 +56,7 @@ const Home = () => {
     try {
       const res = await axios(`https://samnote.mangasocial.online/numbernote`);
       setInformation(res.data.data);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     } finally {
@@ -80,7 +81,6 @@ const Home = () => {
         `https://samnote.mangasocial.online/users-online`
       );
       setUserOnline(res.data.users);
-      console.log(res.data.users);
     } catch (err) {
       console.log(err);
     }
@@ -97,14 +97,14 @@ const Home = () => {
 
   const handleRefresh = () => {
     if (canRefresh) {
-      setLoading(true); // Bắt đầu quá trình tải
-      setCanRefresh(false); // Chặn việc nhấn Refresh trong 5 giây
+      setLoading(true);
+      setCanRefresh(false);
       setTimeout(() => {
-        setCanRefresh(true); // Cho phép nhấn Refresh sau khi đã chờ 5 giây
-      }, 5000); // Thời gian chờ 5 giây
+        setCanRefresh(true);
+      }, 5000);
       setTimeout(() => {
         getProfile();
-      }, 1000); // Tự động tải lại sau 5 giây
+      }, 1000);
     }
   };
 
@@ -234,7 +234,12 @@ const Home = () => {
                     }
               }
             >
-              Login
+              <Link
+                to="login"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Login
+              </Link>
             </li>
           </ul>
           <div onClick={toggleMenu}>
@@ -359,7 +364,7 @@ const Home = () => {
                     cursor: "pointer",
                   }}
                   onClick={() => {
-                    navigate(`/other-user/${info.id}`);
+                    navigate(`/other-user/${info.idUser}`);
                   }}
                 >
                   <p style={{ margin: 0, width: "5%" }}>{index + 1}</p>
